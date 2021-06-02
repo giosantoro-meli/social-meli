@@ -28,10 +28,13 @@ public class User {
     )
     private List<Post> posts = new ArrayList<>();
 
+    private Boolean isSeller;
+
     public User(){}
 
-    public User(String username) {
+    public User(String username, Boolean isSeller) {
         this.username = username;
+        this.isSeller = isSeller;
     }
 
     public Long getId() {
@@ -52,6 +55,20 @@ public class User {
 
     public List<Post> getPosts() {
         return posts;
+    }
+
+    public Boolean getIsSeller(){return isSeller;}
+
+    public void setFollowed(Set<User> followed) {
+        this.followed = followed;
+    }
+
+    public void setFollowers(Set<User> followers) {
+        this.followers = followers;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     public void setUsername(String username) {

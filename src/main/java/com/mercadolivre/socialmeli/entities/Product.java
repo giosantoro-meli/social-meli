@@ -2,6 +2,7 @@ package com.mercadolivre.socialmeli.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_product")
@@ -69,5 +70,18 @@ public class Product {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return product_id.equals(product.product_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(product_id);
     }
 }

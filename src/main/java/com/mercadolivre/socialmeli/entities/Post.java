@@ -1,6 +1,7 @@
 package com.mercadolivre.socialmeli.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_post;
-    private Date date;
+    private LocalDate date;
 
     @OneToOne
     private Product detail;
@@ -26,14 +27,16 @@ public class Post {
 
     public Post(){}
 
-    public Post(Date date, Product detail, Integer category, Double price) {
+    public Post(User user, LocalDate date, Product detail, Integer category, Double price) {
+        this.user = user;
         this.date = date;
         this.detail = detail;
         this.category = category;
         this.price = price;
     }
 
-    public Post(Date date, Product detail, Integer category, Double price, Boolean hasPromo, Double discount) {
+    public Post(User user, LocalDate date, Product detail, Integer category, Double price, Boolean hasPromo, Double discount) {
+        this.user = user;
         this.date = date;
         this.detail = detail;
         this.category = category;
@@ -50,7 +53,7 @@ public class Post {
         return id_post;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
