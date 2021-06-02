@@ -1,6 +1,7 @@
 package com.mercadolivre.socialmeli.services;
 
 import com.mercadolivre.socialmeli.dto.UserDTO;
+import com.mercadolivre.socialmeli.dto.UserFollowersCountDTO;
 import com.mercadolivre.socialmeli.entities.User;
 import com.mercadolivre.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,13 @@ public class UserService {
         repository.saveAll(Arrays.asList(user, userToFollow));
 
        return user;
+    }
+
+    public UserFollowersCountDTO getUserFollowersCount(Integer userId){
+        User user = repository.getById(userId);
+        UserFollowersCountDTO userFollowersCountDTO = new UserFollowersCountDTO(user);
+        userFollowersCountDTO.setFollowersCount(user.getFollowed().size());
+
+        return userFollowersCountDTO;
     }
 }
