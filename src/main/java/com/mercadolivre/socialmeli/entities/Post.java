@@ -14,7 +14,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_post;
+    private Integer id_post;
     private LocalDate date;
 
     @OneToOne
@@ -49,7 +49,7 @@ public class Post {
         return user;
     }
 
-    public Long getId_post() {
+    public Integer getId_post() {
         return id_post;
     }
 

@@ -9,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     private String username;
 
     @ManyToMany
@@ -37,7 +37,7 @@ public class User {
         this.isSeller = isSeller;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

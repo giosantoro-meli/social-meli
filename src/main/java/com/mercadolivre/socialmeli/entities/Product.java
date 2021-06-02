@@ -10,7 +10,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long product_id;
+    private Integer product_id;
     private String productName;
     private String type;
     private String brand;
@@ -28,7 +28,7 @@ public class Product {
         this.notes = notes;
     }
 
-    public Long getProduct_id() {
+    public Integer getProduct_id() {
         return product_id;
     }
 
