@@ -9,8 +9,6 @@ import com.mercadolivre.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +30,17 @@ public class UserService {
         repository.saveAll(Arrays.asList(user, userToFollow));
 
        return user;
+    }
+
+    public User unfollow(Integer userId, Integer userIdToUnfollow){
+        User user = repository.getById(userId);
+        User userToUnfollow = repository.getById(userIdToUnfollow);
+
+        userToUnfollow.getFollowed().remove(user);
+
+        repository.saveAll(Arrays.asList(user, userToUnfollow));
+
+        return user;
     }
 
     public UserFollowersCountDTO getUserFollowersCount(Integer userId){

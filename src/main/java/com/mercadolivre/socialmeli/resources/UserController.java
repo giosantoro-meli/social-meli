@@ -44,4 +44,10 @@ public class UserController {
         UserFollowedListDTO userFollowedListDTO = service.getUserFollowedList(userId);
         return ResponseEntity.ok(userFollowedListDTO);
     }
+
+    @RequestMapping(value="/{userId}/unfollow/{userIdToUnfollow}", method = RequestMethod.POST)
+    public ResponseEntity<Void> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        User user = service.unfollow(userId, userIdToUnfollow);
+        return ResponseEntity.ok().build();
+    }
 }
