@@ -7,8 +7,16 @@ public class UserDTO {
     private String name;
 
     public UserDTO(User user){
-        this.userId = getUserId();
-        this.name = getName();
+        this.userId = user.getId();
+        this.name = user.getUsername();
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getUserId() {

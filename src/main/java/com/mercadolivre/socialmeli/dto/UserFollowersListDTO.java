@@ -5,22 +5,12 @@ import com.mercadolivre.socialmeli.entities.User;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserFollowersListDTO{
-    private final Integer userId;
-    private final String username;
+public class UserFollowersListDTO extends UserDTO{
+
     private Set<UserDTO> followers = new HashSet<>();
 
     public UserFollowersListDTO(User user) {
-        this.userId = user.getId();
-        this.username = user.getUsername();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public String getUsername() {
-        return username;
+        super(user);
     }
 
     public Set<UserDTO> getFollowers() {
