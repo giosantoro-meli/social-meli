@@ -10,6 +10,7 @@ import com.mercadolivre.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,10 +56,23 @@ public class UserService {
         return userFollowersCountDTO;
     }
 
-    public UserFollowersListDTO getUserFollowersList(Integer userId){
+    public UserFollowersListDTO getUserFollowersList(Integer userId, String orderBy){
         User user = repository.getById(userId);
         UserFollowersListDTO userFollowersListDTO = new UserFollowersListDTO(user);
-        userFollowersListDTO.setFollowers(user.getFollowed().stream().map(UserDTO::new).collect(Collectors.toSet()));
+
+        if(orderBy.equals("name_asc")){
+            userFollowersListDTO.setFollowers(user
+                    .getFollowed().stream()
+                    .sorted(Comparator.comparing(User::getUsername, String::compareToIgnoreCase))
+                    .map(UserDTO::new).collect(Collectors.toList()));
+        }
+        if(orderBy.equals("name_desc")){
+            userFollowersListDTO.setFollowers(user
+                    .getFollowed().stream()
+                    .sorted(Comparator.comparing(User::getUsername, String::compareToIgnoreCase)
+                            .reversed()).map(UserDTO::new).collect(Collectors.toList()));
+        }
+
         return userFollowersListDTO;
     }
 

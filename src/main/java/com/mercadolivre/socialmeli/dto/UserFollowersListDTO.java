@@ -2,22 +2,24 @@ package com.mercadolivre.socialmeli.dto;
 
 import com.mercadolivre.socialmeli.entities.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserFollowersListDTO extends UserDTO{
 
-    private Set<UserDTO> followers = new HashSet<>();
+    private List<UserDTO> followers = new ArrayList<>();
 
     public UserFollowersListDTO(User user) {
         super(user);
     }
 
-    public Set<UserDTO> getFollowers() {
+    public List<UserDTO> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(Set<UserDTO> followers) {
+    public void setFollowers(List<UserDTO> followers) {
         this.followers = followers;
     }
 }
