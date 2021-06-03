@@ -76,10 +76,22 @@ public class UserService {
         return userFollowersListDTO;
     }
 
-    public UserFollowedListDTO getUserFollowedList(Integer userId){
+    public UserFollowedListDTO getUserFollowedList(Integer userId, String orderBy){
         User user = repository.getById(userId);
         UserFollowedListDTO userFollowedListDTO = new UserFollowedListDTO(user);
-        userFollowedListDTO.setFollowed(user.getFollowers().stream().map(UserDTO::new).collect(Collectors.toSet()));
+
+        if(orderBy.equals("name_asc")){
+            userFollowedListDTO.setFollowed(user.getFollowers().stream()
+            .sorted(Comparator.comparing(User::getUsername, String::compareToIgnoreCase))
+            .map(UserDTO::new).collect(Collectors.toList()));
+        }
+
+        if(orderBy.equals("name_desc")){
+            userFollowedListDTO.setFollowed(user.getFollowers().stream()
+                    .sorted(Comparator.comparing(User::getUsername, String::compareToIgnoreCase)
+                    .reversed()).map(UserDTO::new).collect(Collectors.toList()));
+        }
+
         return userFollowedListDTO;
     }
 }

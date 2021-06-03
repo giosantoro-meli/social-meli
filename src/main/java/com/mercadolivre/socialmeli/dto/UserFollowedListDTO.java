@@ -2,13 +2,13 @@ package com.mercadolivre.socialmeli.dto;
 
 import com.mercadolivre.socialmeli.entities.User;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserFollowedListDTO{
     private final Integer userId;
     private final String username;
-    private Set<UserDTO> followed = new HashSet<>();
+    private List<UserDTO> followed = new ArrayList<>();
 
     public UserFollowedListDTO(User user) {
         this.userId = user.getId();
@@ -23,11 +23,11 @@ public class UserFollowedListDTO{
         return username;
     }
 
-    public Set<UserDTO> getFollowed() {
+    public List<UserDTO> getFollowed() {
         return followed;
     }
 
-    public void setFollowed(Set<UserDTO> followed) {
+    public void setFollowed(List<UserDTO> followed) {
         this.followed = followed;
     }
 }

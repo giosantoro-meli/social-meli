@@ -3,9 +3,7 @@ package com.mercadolivre.socialmeli.dto;
 import com.mercadolivre.socialmeli.entities.User;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserFollowersListDTO extends UserDTO{
 

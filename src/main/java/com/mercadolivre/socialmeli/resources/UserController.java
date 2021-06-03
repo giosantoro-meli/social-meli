@@ -42,8 +42,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{userId}/followed/list", method = RequestMethod.GET)
-    public ResponseEntity<UserFollowedListDTO> getUserFollowedList(@PathVariable Integer userId){
-        UserFollowedListDTO userFollowedListDTO = service.getUserFollowedList(userId);
+    public ResponseEntity<UserFollowedListDTO> getUserFollowedList(
+            @PathVariable Integer userId,
+            @RequestParam(value = "order", defaultValue = "name_asc") String orderBy){
+        UserFollowedListDTO userFollowedListDTO = service.getUserFollowedList(userId, orderBy);
         return ResponseEntity.ok(userFollowedListDTO);
     }
 
