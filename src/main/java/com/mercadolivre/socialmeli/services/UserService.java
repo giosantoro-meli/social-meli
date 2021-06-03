@@ -5,6 +5,7 @@ import com.mercadolivre.socialmeli.dto.UserFollowedListDTO;
 import com.mercadolivre.socialmeli.dto.UserFollowersCountDTO;
 import com.mercadolivre.socialmeli.dto.UserFollowersListDTO;
 import com.mercadolivre.socialmeli.entities.User;
+import com.mercadolivre.socialmeli.exceptions.NotAllowedToFollowException;
 import com.mercadolivre.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,16 @@ public class UserService {
         this.repository = repository;
     }
 
-    //TODO limitar seguidores apenas para vendedores
     public User follow(Integer userId, Integer userToFollowId){
         User user = repository.getById(userId);
         User userToFollow = repository.getById(userToFollowId);
 
-        userToFollow.getFollowed().add(user);
+        if(!userToFollow.getIsSeller())
+            throw new NotAllowedToFollowException("Only sellers can be followed!");
+        if(userId == userToFollowId)
+            throw new NotAllowedToFollowException("One user cannot follow itself!");
 
+        userToFollow.getFollowed().add(user);
         repository.saveAll(Arrays.asList(user, userToFollow));
 
        return user;
