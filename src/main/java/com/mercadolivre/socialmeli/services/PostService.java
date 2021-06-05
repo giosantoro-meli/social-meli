@@ -2,6 +2,7 @@ package com.mercadolivre.socialmeli.services;
 
 import com.mercadolivre.socialmeli.dto.PostDTO;
 import com.mercadolivre.socialmeli.dto.ProductDTO;
+import com.mercadolivre.socialmeli.dto.PromoPostDTO;
 import com.mercadolivre.socialmeli.entities.Post;
 import com.mercadolivre.socialmeli.entities.Product;
 import com.mercadolivre.socialmeli.entities.User;
@@ -33,6 +34,20 @@ public class PostService {
 
         productRepository.save(product);
         postRepository.save(post);
+        userRepository.save(user);
+    }
+
+    public void createPromoPost(PromoPostDTO promoPostDTO){
+        Integer userId = promoPostDTO.getUserId();
+        User user = userRepository.getById(userId);
+        if(!user.getIsSeller()) user.setSeller(true);
+
+        Product promoProduct = new Product(promoPostDTO.getDetail());
+        Post promoPost = new Post(user, promoPostDTO.getDate(), promoProduct, promoPostDTO.getCategory(),
+                promoPostDTO.getPrice(), promoPostDTO.getHasPromo(), promoPostDTO.getDiscount());
+
+        productRepository.save(promoProduct);
+        postRepository.save(promoPost);
         userRepository.save(user);
     }
 }
