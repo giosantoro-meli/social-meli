@@ -1,8 +1,9 @@
 package com.mercadolivre.socialmeli.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,8 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id_post;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
 
     @OneToOne

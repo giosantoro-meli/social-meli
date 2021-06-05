@@ -1,6 +1,5 @@
 package com.mercadolivre.socialmeli.resources;
 
-import com.mercadolivre.socialmeli.dto.UserDTO;
 import com.mercadolivre.socialmeli.dto.UserFollowedListDTO;
 import com.mercadolivre.socialmeli.dto.UserFollowersCountDTO;
 import com.mercadolivre.socialmeli.dto.UserFollowersListDTO;
@@ -9,7 +8,6 @@ import com.mercadolivre.socialmeli.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
 
 @RestController
 @RequestMapping("/users")

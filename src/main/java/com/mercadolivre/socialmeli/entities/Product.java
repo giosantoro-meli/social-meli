@@ -1,5 +1,7 @@
 package com.mercadolivre.socialmeli.entities;
 
+import com.mercadolivre.socialmeli.dto.ProductDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -26,6 +28,14 @@ public class Product {
         this.brand = brand;
         this.color = color;
         this.notes = notes;
+    }
+
+    public Product(ProductDTO detail) {
+        this.productName = detail.getProductName();
+        this.brand = detail.getBrand();
+        this.color = detail.getColor();
+        this.type = detail.getType();
+        this.notes = detail.getNotes();
     }
 
     public Integer getProduct_id() {

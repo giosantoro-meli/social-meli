@@ -77,6 +77,10 @@ public class User {
         this.username = username;
     }
 
+    public void setSeller(Boolean seller) {
+        isSeller = seller;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
