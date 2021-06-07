@@ -28,7 +28,7 @@ public class UserService {
 
         if(!userToFollow.getIsSeller())
             throw new NotAllowedToFollowException("Only sellers can be followed!");
-        if(userId == userToFollowId)
+        if(userId.equals(userToFollowId))
             throw new NotAllowedToFollowException("One user cannot follow itself!");
 
         userToFollow.getFollowed().add(user);

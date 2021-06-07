@@ -1,8 +1,6 @@
 package com.mercadolivre.socialmeli.services;
 
-import com.mercadolivre.socialmeli.dto.PostDTO;
-import com.mercadolivre.socialmeli.dto.ProductDTO;
-import com.mercadolivre.socialmeli.dto.PromoPostDTO;
+import com.mercadolivre.socialmeli.dto.*;
 import com.mercadolivre.socialmeli.entities.Post;
 import com.mercadolivre.socialmeli.entities.Product;
 import com.mercadolivre.socialmeli.entities.User;
@@ -10,6 +8,12 @@ import com.mercadolivre.socialmeli.repositories.PostRepository;
 import com.mercadolivre.socialmeli.repositories.ProductRepository;
 import com.mercadolivre.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -50,4 +54,32 @@ public class PostService {
         postRepository.save(promoPost);
         userRepository.save(user);
     }
+
+    public UserPostsDTO getUserFollowedPosts(Integer userId, String orderBy){
+        User user = userRepository.getById(userId);
+        UserPostsDTO userPostsDTO = new UserPostsDTO();
+        LocalDate twoWeeksAgo = LocalDate.now().minusWeeks(2);
+
+        List<Post> postList = new ArrayList<>();
+        for(User followed : user.getFollowers()){
+            for(Post post : followed.getPosts()){
+                if(!post.getDate().isBefore(twoWeeksAgo))
+                postList.add(post);
+            }
+        }
+
+        List<Post> sortedList = null;
+        if(orderBy.equals("date_asc")){
+            sortedList = postList.stream().sorted(Comparator.comparing(Post::getDate)).collect(Collectors.toList());
+        }
+        if(orderBy.equals("date_desc")){
+            sortedList = postList.stream().sorted(Comparator.comparing(Post::getDate).reversed()).collect(Collectors.toList());
+        }
+
+        userPostsDTO.setUserId(userId);
+        userPostsDTO.setUserPosts(sortedList);
+
+        return userPostsDTO;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.mercadolivre.socialmeli.resources;
 
 import com.mercadolivre.socialmeli.dto.PostDTO;
 import com.mercadolivre.socialmeli.dto.PromoPostDTO;
+import com.mercadolivre.socialmeli.dto.UserPostsDTO;
 import com.mercadolivre.socialmeli.services.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,14 @@ public class PostController {
     public ResponseEntity<Void> newPromoPost(@RequestBody PromoPostDTO promoPostDTO){
         service.createPromoPost(promoPostDTO);
         return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = "/followed/{userId}/list", method = RequestMethod.GET)
+        public ResponseEntity<UserPostsDTO> getUserFollowedPosts(
+            @PathVariable Integer userId,
+            @RequestParam(value = "order", defaultValue = "date_asc") String orderBy
+    ){
+        UserPostsDTO userPostsDTO = service.getUserFollowedPosts(userId, orderBy);
+        return ResponseEntity.ok(userPostsDTO);
     }
 }
