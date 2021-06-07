@@ -42,8 +42,8 @@ public class DataBaseInitService {
         Product p2 = new Product("Marker kit", "pens", "Faber-Castell", "multi", "Top kit");
         Product p3 = new Product("Cotton blanket", "single dorm", "Santista", "blue", "200 strings");
 
-        Post post1 = new Post(seller1,LocalDate.now(),p1,1,236.0);
-        Post post2 = new Post(seller2,LocalDate.now().minusDays(2),p2,1,18.0);
+        Post post1 = new Post(seller1,LocalDate.now(),p1,1,236.0,false, 0.0);
+        Post post2 = new Post(seller2,LocalDate.now().minusDays(2),p2,1,18.0, false, 0.0);
         Post post3 = new Post(seller3,LocalDate.now().minusDays(5),p3,3,89.0,true,0.2);
 
         productRepository.saveAll(Arrays.asList(p1,p2,p3));

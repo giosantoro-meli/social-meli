@@ -34,7 +34,8 @@ public class PostService {
         if(!user.getIsSeller()) user.setSeller(true);
 
         Product product = new Product(postDTO.getDetail());
-        Post post = new Post(user, postDTO.getDate(), product, postDTO.getCategory(), postDTO.getPrice());
+        Post post = new Post(user, postDTO.getDate(), product, postDTO.getCategory(),
+                postDTO.getPrice(), false, 0.0);
 
         productRepository.save(product);
         postRepository.save(post);
