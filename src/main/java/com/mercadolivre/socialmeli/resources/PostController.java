@@ -44,4 +44,10 @@ public class PostController {
         UserPromoPostsCountDTO userPromoPostsCountDTO = service.getUserPromoPostsCount(userId);
         return ResponseEntity.ok(userPromoPostsCountDTO);
     }
+
+    @RequestMapping(value = "/{userId}/list", method = RequestMethod.GET)
+    public ResponseEntity<UserPostsDTO> getUserPromoPostsListById(@PathVariable Integer userId){
+        UserPostsDTO userPostsDTO = service.getUserPromoPostsList(userId);
+        return ResponseEntity.ok(userPostsDTO);
+    }
 }

@@ -90,4 +90,21 @@ public class PostService {
 
         return new UserPromoPostsCountDTO(user, count);
     }
+
+    public UserPostsDTO getUserPromoPostsList(Integer userId){
+        User user = userRepository.getById(userId);
+        UserPostsDTO userPostsDTO = new UserPostsDTO();
+        List<Post> listOfPromoPosts = new ArrayList<>();
+
+        for(Post p : user.getPosts()){
+            if(p.getHasPromo()){
+                listOfPromoPosts.add(p);
+            }
+        }
+
+        userPostsDTO.setUserId(userId);
+        userPostsDTO.setUserPosts(listOfPromoPosts);
+
+        return userPostsDTO;
+    }
 }
