@@ -44,7 +44,7 @@ public class DataBaseInitService {
 
         Post post1 = new Post(seller1,LocalDate.now(),p1,1,236.0);
         Post post2 = new Post(seller2,LocalDate.now().minusDays(2),p2,1,18.0);
-        Post post3 = new Post(seller3,LocalDate.now().minusDays(5),p3,1,89.0,true,0.2);
+        Post post3 = new Post(seller3,LocalDate.now().minusDays(5),p3,3,89.0,true,0.2);
 
         productRepository.saveAll(Arrays.asList(p1,p2,p3));
         postRepository.saveAll(Arrays.asList(post1,post2,post3));

@@ -3,6 +3,7 @@ package com.mercadolivre.socialmeli.resources;
 import com.mercadolivre.socialmeli.dto.PostDTO;
 import com.mercadolivre.socialmeli.dto.PromoPostDTO;
 import com.mercadolivre.socialmeli.dto.UserPostsDTO;
+import com.mercadolivre.socialmeli.dto.UserPromoPostsCountDTO;
 import com.mercadolivre.socialmeli.services.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,11 @@ public class PostController {
     ){
         UserPostsDTO userPostsDTO = service.getUserFollowedPosts(userId, orderBy);
         return ResponseEntity.ok(userPostsDTO);
+    }
+
+    @RequestMapping(value = "/{userId}/countPromo", method = RequestMethod.GET)
+    public ResponseEntity<UserPromoPostsCountDTO> getUserPromoPostsCount(@PathVariable Integer userId){
+        UserPromoPostsCountDTO userPromoPostsCountDTO = service.getUserPromoPostsCount(userId);
+        return ResponseEntity.ok(userPromoPostsCountDTO);
     }
 }

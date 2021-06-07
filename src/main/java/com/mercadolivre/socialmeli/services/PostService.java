@@ -82,4 +82,11 @@ public class PostService {
         return userPostsDTO;
     }
 
+    public UserPromoPostsCountDTO getUserPromoPostsCount(Integer userId){
+        User user = userRepository.getById(userId);
+
+        int count = (int) user.getPosts().stream().filter(Post::getHasPromo).count();
+
+        return new UserPromoPostsCountDTO(user, count);
+    }
 }
